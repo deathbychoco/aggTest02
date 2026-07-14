@@ -11,7 +11,7 @@ updated: 2026-07-14
 | Phase | Status | Entries |
 |---|---|---|
 | 01 — EDA | complete | 1 |
-| 02 — PK model | not started | 0 |
+| 02 — PK model | complete | 1 |
 | 03 — Covariate + PD | not started | 0 |
 | 04 — Diagnostics + VPC | not started | 0 |
 | 05 — Plankton mapping | not started | 0 |
