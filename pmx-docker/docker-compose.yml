@@ -1,0 +1,17 @@
+services:
+  pmx:
+    build: .
+    image: pmx-nlmixr2:latest
+    container_name: pmx-nlmixr2
+    restart: unless-stopped
+    ports:
+      - "2222:22"          # SSH — Claude Science connects here
+    volumes:
+      - pmx-work:/home/pmx/work       # analysis outputs persist
+      - pmx-rlib:/home/pmx/R/library  # extra R packages persist
+    environment:
+      - TZ=Europe/Vienna   # adjust to your timezone
+
+volumes:
+  pmx-work:
+  pmx-rlib:

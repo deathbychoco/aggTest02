@@ -1,0 +1,25 @@
+# --- Security: SSH keys / credentials ---
+pmx-docker/pmx_claude.key
+pmx-docker/pmx_claude.key.pub
+*.pem
+*.key
+*.key.pub
+id_rsa*
+id_ed25519*
+*.ppk
+.ssh/
+.env
+.env.*
+*.secret
+*credentials*
+
+# --- Local machine-specific Claude settings ---
+.claude/settings.local.json
+
+# --- OS / editor cruft ---
+.DS_Store
+__MACOSX/
+Thumbs.db
+
+# --- Archives (large / regeneratable) ---
+docs.zip
