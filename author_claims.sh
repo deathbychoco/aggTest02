@@ -18,8 +18,12 @@ cd "$REPO_DIR"
 mkdir -p nekton-data
 
 # Foton ids (the action-key hash plankton assigned each foton — from `plankton producer <output-hash>`)
-EDA_FOTON="sha256:b2629b72eec7aa990873f49447cc39405b965e5d118c4b0eda77bac547e191d4"
-PK_FOTON="sha256:7e9e052871eb4295f8b88bfef2d36d55702d0557333de2c55b57394e9eb912ba"
+# Corrected 2026-07-15: the original fotons (b2629b72.../7e9e0528...) were authored with the
+# wrong predicateType (kton.dev/foton/v0 instead of plankton.dev/foton/v0) and absolute paths,
+# so kton mirror silently skipped them. Re-authored via author_fotons.sh with relative paths —
+# these are the correct ids.
+EDA_FOTON="sha256:b8d48ed1410bb4ed7c85e7d5ce747cdbf20a011352f5d95bb5b2f15820c9d2a5"
+PK_FOTON="sha256:f3a2740adcebfc607c29aca82d9276da22e1a165da46ceeb443a05645aca7ab8"
 
 # ---------- 1. Claim — authored F_eda ----------
 cat > /tmp/claim_eda.json <<EOF
