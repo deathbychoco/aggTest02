@@ -1,0 +1,41 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls -la /mnt/c/dev/plankton 2>&1 | head -100)",
+      "Read(//mnt/c/dev/plankton/**)",
+      "Bash(find \"/mnt/c/dev/plankton_fed_demo/plankton-federation-demo\" -maxdepth 3 2>&1)",
+      "Read(//mnt/c/dev/plankton_fed_demo/plankton-federation-demo/**)",
+      "Bash(find /mnt/c/dev/plankton_fed_demo -maxdepth 1 *)",
+      "Read(//mnt/c/dev/plankton_fed_demo/**)",
+      "Bash(git remote -v 2>&1 *)",
+      "Read(//mnt/c/dev/**)",
+      "Bash(git -C /mnt/c/dev/MCP log --oneline -10)",
+      "Bash(git -C /mnt/c/dev/MCP status)",
+      "Bash(git -C /mnt/c/dev/MCP ls-files)",
+      "Bash(git -C /mnt/c/dev/MCP log --all --oneline -- wolfgang.key)",
+      "Bash(go build *)",
+      "Bash(nekton)",
+      "Bash(plankton)",
+      "Bash(PLANKTON_DIR=./plankton-data plankton producer sha256:ceb4108170d26385b116dd7138d8ca0f6baced84b45d23754f80718a1adf4b11)",
+      "Bash(PLANKTON_DIR=./plankton-data plankton producer sha256:de5a1ce61311996f7acc4dc6cea950e7a38645499239aa1ae6e1288beef2dc79)",
+      "Bash(NEKTON_DIR=./nekton-data nekton add nekton-data/c_eda_authored.dsse.json)",
+      "Bash(NEKTON_DIR=./nekton-data nekton add nekton-data/c_pk_saem_authored.dsse.json)",
+      "Bash(NEKTON_DIR=./nekton-data nekton about sha256:b2629b72eec7aa990873f49447cc39405b965e5d118c4b0eda77bac547e191d4)",
+      "Bash(NEKTON_DIR=./nekton-data nekton about sha256:7e9e052871eb4295f8b88bfef2d36d55702d0557333de2c55b57394e9eb912ba)",
+      "Bash(nekton verify *)",
+      "Bash(rm -f /tmp/claim_eda.json /tmp/claim_pk.json)",
+      "Bash(chmod +x /mnt/c/dev/MCP/author_claims.sh)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git log *)",
+      "Bash(git ls-tree *)"
+    ],
+    "additionalDirectories": [
+      "/mnt/c/dev/plankton/projectdocs/plankton/phases/verstehen-destillieren",
+      "/mnt/c/dev/plankton/projectdocs/plankton/phases/challenge-offene-fragen",
+      "/mnt/c/dev/plankton/projectdocs/plankton",
+      "/mnt/c/dev/plankton",
+      "/tmp"
+    ]
+  }
+}

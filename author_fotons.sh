@@ -53,42 +53,51 @@ if [ $MISSING -eq 1 ]; then
 fi
 
 # ---------- 3. Author foton — Phase 1 EDA ----------
+# Copy files into a staging dir with RELATIVE names so plankton records
+# relative paths (structural) rather than absolute machine paths (incidental).
+# Per plankton spec: "Relative paths are structural; absolute paths are incidental."
+STAGE=$(mktemp -d)
+cp "$WORK_DIR/nca_summary.csv"  "$STAGE/nca_summary.csv"
+cp "$WORK_DIR/demographics.csv" "$STAGE/demographics.csv"
+cp "$WORK_DIR/eda_plots.pdf"    "$STAGE/eda_plots.pdf"
+cp "$WORK_DIR/fit_pk_summary.txt" "$STAGE/fit_pk_summary.txt"
+cp "$WORK_DIR/fit_pk_params.csv"  "$STAGE/fit_pk_params.csv"
+cp "$WORK_DIR/fit_pk_plots.pdf"   "$STAGE/fit_pk_plots.pdf"
+
 echo ""
-echo "=== Authoring F_eda ==="
+echo "=== Authoring F_eda (relative paths) ==="
 
-# The warfarin dataset is the input (from nlmixr2data package)
-# We use the nca_summary.csv as a proxy for the dataset hash (it derives from it)
-# The actual input is the R package — we document it in the protocol descriptor
-
-plankton author \
-  --in  "$WORK_DIR/nca_summary.csv" \
-  --in  "$WORK_DIR/demographics.csv" \
-  --out "$WORK_DIR/eda_plots.pdf" \
+(cd "$STAGE" && plankton author \
+  --in  nca_summary.csv \
+  --in  demographics.csv \
+  --out eda_plots.pdf \
   --cmd "Rscript eda_warfarin.R" \
   --kind "r-eda" \
-  --sign "${KEY_NAME}.key" \
-  -o plankton-data/f_eda.dsse.json
+  --sign "$REPO_DIR/${KEY_NAME}.key" \
+  -o "$REPO_DIR/plankton-data/f_eda.dsse.json")
 
 echo "Adding F_eda to registry..."
 PLANKTON_DIR=./plankton-data plankton add plankton-data/f_eda.dsse.json
 
 # ---------- 4. Author foton — Phase 2 PK model ----------
 echo ""
-echo "=== Authoring F_pk_saem ==="
+echo "=== Authoring F_pk_saem (relative paths) ==="
 
-plankton author \
-  --in  "$WORK_DIR/nca_summary.csv" \
-  --in  "$WORK_DIR/demographics.csv" \
-  --out "$WORK_DIR/fit_pk_summary.txt" \
-  --out "$WORK_DIR/fit_pk_params.csv" \
-  --out "$WORK_DIR/fit_pk_plots.pdf" \
+(cd "$STAGE" && plankton author \
+  --in  nca_summary.csv \
+  --in  demographics.csv \
+  --out fit_pk_summary.txt \
+  --out fit_pk_params.csv \
+  --out fit_pk_plots.pdf \
   --cmd "Rscript pk_model_warfarin.R" \
   --kind "nlmixr2-saem" \
-  --sign "${KEY_NAME}.key" \
-  -o plankton-data/f_pk_saem.dsse.json
+  --sign "$REPO_DIR/${KEY_NAME}.key" \
+  -o "$REPO_DIR/plankton-data/f_pk_saem.dsse.json")
 
 echo "Adding F_pk_saem to registry..."
 PLANKTON_DIR=./plankton-data plankton add plankton-data/f_pk_saem.dsse.json
+
+rm -rf "$STAGE"
 
 # ---------- 5. Verify ----------
 echo ""
@@ -97,8 +106,21 @@ ls -lh plankton-data/
 
 echo ""
 echo "=== Lineage check: who produced fit_pk_plots.pdf? ==="
-PLANKTON_DIR=./plankton-data plankton producer \
-  "sha256:de5a1ce61311996f7acc4dc6cea950e7a38645499239aa1ae6e1288beef2dc79" || true
+# Extract hash from the newly authored foton rather than hardcoding
+FIT_HASH=$(python3 -c "
+import json,base64,sys
+env=json.load(open('plankton-data/f_pk_saem.dsse.json'))
+st=json.loads(base64.b64decode(env['payload']))
+for s in st['subject']:
+    if 'fit_pk_plots' in s['name']:
+        print('sha256:'+s['digest']['sha256'])
+        break
+" 2>/dev/null)
+if [ -n "$FIT_HASH" ]; then
+  PLANKTON_DIR=./plankton-data plankton producer "$FIT_HASH" || true
+else
+  echo "(could not extract hash from foton)"
+fi
 
 # ---------- 6. Commit and push ----------
 echo ""
