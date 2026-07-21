@@ -1,0 +1,1 @@
+{"clusters":[{"label":0,"mean":[-1.046809,0.486626,-0.881695,-0.762754],"size":129},{"label":1,"mean":[0.672025,0.805263,-0.289347,-0.384104],"size":85},{"label":2,"mean":[0.654758,-1.102707,1.162463,1.101211],"size":119}],"features":["bill_length_mm","bill_depth_mm","flipper_length_mm","body_mass_g"],"n_clusters":3,"n_rows":333}
