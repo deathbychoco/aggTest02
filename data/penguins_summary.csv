@@ -1,0 +1,4 @@
+cluster,count,bill_length_mm_mean,bill_length_mm_std,bill_length_mm_min,bill_length_mm_max,bill_depth_mm_mean,bill_depth_mm_std,bill_depth_mm_min,bill_depth_mm_max,flipper_length_mm_mean,flipper_length_mm_std,flipper_length_mm_min,flipper_length_mm_max,body_mass_g_mean,body_mass_g_std,body_mass_g_min,body_mass_g_max
+0,129,38.2767,2.2588,32.1,43.2,18.1217,1.1644,15.5,21.2,188.6279,5.7215,172.0,202.0,3593.7984,407.4865,2850.0,4675.0
+1,119,47.5681,3.1061,40.9,59.6,14.9966,0.986,13.1,17.3,217.2353,6.5854,203.0,231.0,5092.437,501.4762,3950.0,6300.0
+2,85,47.6624,3.8681,40.8,58.0,18.7482,1.1367,16.4,21.5,196.9176,6.3456,178.0,212.0,3898.2353,414.4127,2700.0,4800.0
