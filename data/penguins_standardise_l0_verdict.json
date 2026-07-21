@@ -1,0 +1,16 @@
+{
+  "by": "claude",
+  "candidate": {
+    "hash": "sha256:6217e82c75acc88b11bd5bdc55528f48b0329e6b89ba37892b9dafee5b43fca0",
+    "name": "penguins_clean.csv"
+  },
+  "comparison": "byte-identical (sha256 equal)",
+  "foton_reference": "sha256:55c9c6004047d16525944527cbddb8200094c6571fe23ab20ef2d6c0f40684d9",
+  "level": "L0",
+  "reference": {
+    "hash": "sha256:6217e82c75acc88b11bd5bdc55528f48b0329e6b89ba37892b9dafee5b43fca0",
+    "name": "penguins_clean.csv"
+  },
+  "result": "PASS",
+  "when": "2026-07-21T12:00:00Z"
+}
